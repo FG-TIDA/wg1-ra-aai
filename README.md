@@ -51,29 +51,44 @@ update automatically (via GitHub Actions).
 
 ## Building locally (optional)
 
-To preview your changes on your own machine before opening a pull request:
+To preview your changes on your own machine before opening a pull request.
 
-1. **Install Python 3.10+**, then the dependencies:
+**1. Clone your fork** (replace `<your-username>` with your GitHub username):
 
-   ```shell
-   pip install -r requirements.txt
-   ```
+```shell
+git clone https://github.com/<your-username>/wg1-ra-aai.git
+cd wg1-ra-aai
+```
 
-2. *(Optional, for diagrams)* install Java and download `plantuml.jar` from
-   <https://plantuml.com/download> into the repository root, then point the
-   build at it:
+**2. Install Python 3.10+** (from <https://www.python.org/downloads/>), then
+install the build dependencies. A virtual environment is recommended so the
+packages stay isolated:
 
-   ```powershell
-   $env:PLANTUML = "java -jar $PWD/plantuml.jar"
-   ```
+```shell
+python -m venv .venv
+# activate it:
+#   Windows (PowerShell):  .venv\Scripts\Activate.ps1
+#   macOS / Linux:         source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-3. **Build the site:**
+**3. *(Optional, for diagrams)*** install Java, download `plantuml.jar` from
+<https://plantuml.com/download> into the repository root, and point the build at
+it:
 
-   ```shell
-   sphinx-build -b html src/doc target/html
-   ```
+```powershell
+$env:PLANTUML = "java -jar $PWD/plantuml.jar"
+```
 
-   Then open `target/html/index.html` in a browser.
+Without this, the build still works but diagrams show as broken images locally.
+
+**4. Build the site:**
+
+```shell
+sphinx-build -b html src/doc target/html
+```
+
+Then open `target/html/index.html` in a browser.
 
 **Live preview (recommended)** — rebuilds and refreshes the browser as you save.
 On Windows:
@@ -81,6 +96,9 @@ On Windows:
 ```powershell
 ./preview.ps1
 ```
+
+**5. Commit, push to your fork, and open a pull request** (see *How to
+contribute* above).
 
 Full build details and customisation notes are in [HOWTO.md](HOWTO.md).
 
