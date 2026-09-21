@@ -72,33 +72,48 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-**3. *(Optional, for diagrams)*** install Java, download `plantuml.jar` from
-<https://plantuml.com/download> into the repository root, and point the build at
-it:
+**3. Diagrams — you can skip this.** Most editing (all the text, tables and
+lists) does **not** need it. You only need this step if your changes include
+diagrams *and* you want to see them drawn on your own machine. Either way, the
+diagrams are always drawn correctly on the published website — this is only
+about the local preview.
+
+If you do want diagrams locally: install [Java](https://adoptium.net/), download
+the file `plantuml.jar` from <https://plantuml.com/download>, save it into the
+project folder (next to `requirements.txt`), and run this once in your terminal
+before building:
 
 ```powershell
 $env:PLANTUML = "java -jar $PWD/plantuml.jar"
 ```
 
-Without this, the build still works but diagrams show as broken images locally.
+(If you skip this, everything still builds — diagrams just appear as a "broken
+image" placeholder in your local preview.)
 
-**4. Build the site:**
+**4. Preview the document.** Two ways:
+
+*Simplest — build once and open the result:*
 
 ```shell
 sphinx-build -b html src/doc target/html
 ```
 
-Then open `target/html/index.html` in a browser.
+Then open the file `target/html/index.html` in your web browser.
 
-**Live preview (recommended)** — rebuilds and refreshes the browser as you save.
-On Windows:
+*Recommended — automatic live preview.* The project already includes a small
+helper script called `preview.ps1` (nothing to install — it is part of the
+files you cloned). On Windows, run it from the project folder:
 
 ```powershell
 ./preview.ps1
 ```
 
-**5. Commit, push to your fork, and open a pull request** (see *How to
-contribute* above).
+It opens the document in your browser and **refreshes it automatically every
+time you save a file**, so you can see your edits as you type. Press `Ctrl+C` in
+the terminal to stop it.
+
+**5. When you are happy, commit your changes, push them to your fork, and open a
+pull request** (see *How to contribute* above).
 
 Full build details and customisation notes are in [HOWTO.md](HOWTO.md).
 
