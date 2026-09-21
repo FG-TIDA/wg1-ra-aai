@@ -1,19 +1,26 @@
+
+.. _chapter-references:
+
 References
-============
+==========
 
-[JSON Web Token]
-    IETF RFC 8725, *JSON Web Token Best Current Practices*,
-    
-    https://datatracker.ietf.org/doc/html/rfc8725
+.. note::
 
-[OpenAPI]
-    OpenAPI Specification v3.0.3 (2020),
-    
-    https://spec.openapis.org/oas/v3.0.3
+   *[Author: list the normative and informative references cited in this
+   document. Below are examples of the format — replace them with the actual
+   IETF, TCG, and other sources you cite.]*
 
-[WSQ]
-    NIST; FBI; *Los Alamos Natinal Laboratory.  Wavelet Scalar Quantization algorithm 2: PDF 2.0*,
-    
-    `https://www.nist.gov/system/files/documents/2020/09/03/11-wsq_bradley_brislawn_standard_ieee_iscs_-_19940530.pdf <https://www.nist.gov/system/files/documents/2020/09/03/11-wsq_bradley_brislawn_standard_ieee_iscs_-_19940530.pdf>`_
+[RATS-Architecture]
+    IETF RFC 9334, *Remote ATtestation procedureS (RATS) Architecture*,
 
+    https://datatracker.ietf.org/doc/html/rfc9334
 
+[EAT]
+    IETF, *Entity Attestation Token (EAT)*,
+
+    https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat
+
+[TCG]
+    Trusted Computing Group, *specifications*,
+
+    https://trustedcomputinggroup.org/

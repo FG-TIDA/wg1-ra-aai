@@ -11,44 +11,30 @@
 
 .. _chapter-overview:
 
-.. only:: html
-
-    .. admonition:: This is a document template
-        :class: tip
-
-        Replace the ``<placeholders>`` and the *lorem ipsum* text throughout with
-        your own content. This landing page is the document's front matter:
-
-        * **Abstract**, **History**, **Authors**, **Keywords** and **Foreword**
-          are standard front-matter sections — keep them and fill them in.
-        * **Chapters 1–4** demonstrate the authoring system (text, figures,
-          tables, diagrams, and API references). Read them, then replace their
-          content with your specification.
-
-        This notice appears on the web version only; it is excluded from the
-        published PDF. See the project ``HOWTO`` for how to build and publish.
-
-Title of this document
-========================
+Remote Attestation Challenges for AI Agents
+===========================================
 
 .. only:: html
 
-    **<subtitle of this document>**
+    **What to attest · How to attest · When to attest?**
 
 .. raw:: latex
 
-    \begin{center}\textbf{<subtitle of this document>}\end{center}
+    \begin{center}\textbf{What to attest {\textperiodcentered} How to attest {\textperiodcentered} When to attest?}\end{center}
 
 Abstract
 --------
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+.. note::
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim id est laborum.
+   *[Author: write a short abstract — what this document analyses (remote
+   attestation challenges for AI agents) and what a reader will take away.]*
+
+This document examines the challenges of remote attestation (RA) for AI agents,
+organised around three questions: what to attest, how to attest, and when to
+attest. It surveys the current RA landscape, states the problem for agentic AI,
+identifies the core challenges and research/standardization gaps, and maps
+existing standards building blocks to the needs of AI-agent attestation.
 
 History
 -------
@@ -62,15 +48,15 @@ History
       - Approval
       - Focus Group
       - Working Group
-    * - <version>
-      - <title>
+    * - 0.1
+      - Remote Attestation Challenges for AI Agents
       - <date>
       - TIDA
-      - <acronym>
+      - RA-AAI
 
 To access this Document as a PDF, open the published documentation site in your web
 browser and click the PDF download link, or navigate directly to
-https://debora-com.github.io/CUTEspecs/specification.pdf.
+https://fg-tida.github.io/wg1-ra-aai/specification.pdf.
 
 Authors
 -------
@@ -92,12 +78,20 @@ Authors
 Keywords
 --------
 
-Lorem, ipsum, dolor, consectetur, adipiscing.
+Remote attestation, AI agents, agentic AI, trust, RATS, TCG, trusted computing.
 
 .. raw:: latex
 
     \newpage
     \osiacenternextsection
+
+Preface
+-------
+
+.. note::
+
+   *[Author: write the preface — the motivation for this document, its scope,
+   and its intended audience.]*
 
 Foreword
 --------
@@ -121,22 +115,6 @@ available in the group's terms of reference.
 
 For more news and updates about the TIDA Community, including its supporter organizations,
 please refer to the community's published resources.
-
-.. raw:: latex
-
-    \osiacenternextsection
-
-Note
-----
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit
-voluptatem accusantium doloremque laudantium.
 
 .. Intellectual Property Rights — section commented out. To restore it, remove the
    leading ".." and the indentation below, and re-add a ".. raw:: latex" block with
@@ -180,10 +158,10 @@ voluptatem accusantium doloremque laudantium.
     :numbered:
     :hidden:
 
-    chapters/01_chapter1
-    chapters/02_chapter2
-    chapters/03_chapter3
-    chapters/04_chapter4/index
-    chapters/05_annex/index
-    chapters/06_appendix/index
+    chapters/01_landscape
+    chapters/02_problem-statement
+    chapters/03_core-challenges
+    chapters/04_three-questions
+    chapters/05_building-blocks
+    chapters/06_future-directions
     chapters/07_references

@@ -5,10 +5,10 @@ source_suffix = {'.rst': 'restructuredtext'}
 master_doc = 'index'
 exclude_patterns = []
 pygments_style = 'colorful'
-project = '<acronym>'
-release = '<version>'
-html_title = "<acronym>"
-author = '<author>'
+project = 'RA-AAI'
+release = 'v0.1'
+html_title = "RA-AAI"
+author = 'FG-TIDA'
 
 numfig = True
 
@@ -21,10 +21,10 @@ latex_documents = [
 
 # --- Cover metadata: single source of truth for index.rst (via substitutions)
 # and the LaTeX cover (via \newcommand interpolation below). Edit here.
-cover_title    = '<acronym>'
-cover_series   = '<series or category>'
-cover_subject  = '<subject line>'
-cover_subtitle = '<subtitle of this document>'
+cover_title    = 'Remote Attestation Challenges for AI Agents'
+cover_series   = 'FG-TIDA'
+cover_subject  = 'Remote attestation for AI agents'
+cover_subtitle = 'What to attest · How to attest · When to attest?'
 
 extensions = ['sphinxcontrib.httpdomain','sphinxcontrib.plantuml','sphinxcontrib.openapi', 'sphinx_copybutton']
 # PlantUML command. On CI (GitHub Actions / Read the Docs) the `plantuml` package
@@ -109,7 +109,7 @@ html_theme_options = {
 }
 html_logo = "images/TIDA_logo.png"
 html_show_sourcelink = False
-copyright = '<year>, <author>'
+copyright = '2026, FG-TIDA'
 html_context = {'project':project, 'version':release, 'copyright': copyright}
 html_last_updated_fmt = '%b %d, %Y'
 html_extra_path = ['yaml']
