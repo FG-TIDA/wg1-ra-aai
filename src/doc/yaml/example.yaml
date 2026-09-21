@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  description: |
+    Example interface for the template.
+
+    Replace this file with your own OpenAPI 3.0.x specification. The reference
+    documentation on this page is generated automatically from the YAML.
+
+    Change log:
+
+    - 1.0.0: Initial version
+  title: Example Interface
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/
+paths:
+  /v1/items:
+    get:
+      description: |
+        Retrieve the list of items.
+      operationId: listItems
+      security:
+        - BearerAuth: [items.read]
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of items to return.
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: The list of items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+              example:
+                - id: "1"
+                  name: "First item"
+                - id: "2"
+                  name: "Second item"
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      description: |
+        Create a new item.
+      operationId: createItem
+      security:
+        - BearerAuth: [items.write]
+      requestBody:
+        description: The item to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+            example:
+              id: "3"
+              name: "New item"
+      responses:
+        201:
+          description: The item was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Item:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the item.
+        name:
+          type: string
+          description: Human-readable name of the item.
+      required:
+        - id
+        - name
+    Error:
+      type: object
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          description: A machine-readable error code.
+        message:
+          type: string
+          description: A human-readable error message.

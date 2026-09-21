@@ -1,0 +1,75 @@
+name: Build and deploy docs
+
+# Build the Sphinx HTML (and PDF) and publish to GitHub Pages
+# on every push to main.
+
+on:
+  push:
+    branches: [main]
+  # Allow manual runs from the Actions tab
+  workflow_dispatch:
+
+# Permissions required by the Pages deploy action
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one Pages deploy at a time; don't cancel an in-progress one
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # PlantUML (for .. uml:: diagrams) + Inkscape (SVG -> PDF for LaTeX).
+      # latexmk + TeX Live provide the PDF build.
+      - name: Install system packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            plantuml inkscape \
+            latexmk texlive-latex-recommended texlive-latex-extra \
+            texlive-fonts-recommended texlive-fonts-extra tex-gyre \
+            texlive-pictures
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build HTML
+        run: sphinx-build -b html src/doc target/html
+
+      - name: Build PDF
+        run: |
+          sphinx-build -b latex src/doc target/latex
+          make -C target/latex
+
+      - name: Include PDF in the site
+        run: cp target/latex/specification.pdf target/html/specification.pdf
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: target/html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
