@@ -16,9 +16,9 @@ References
     https://datatracker.ietf.org/doc/html/rfc9334
 
 [EAT]
-    IETF, *Entity Attestation Token (EAT)*,
+    IETF RFC 9711, *The Entity Attestation Token (EAT)*,
 
-    https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat
+    https://datatracker.ietf.org/doc/html/rfc9711
 
 [TCG]
     Trusted Computing Group, *specifications*,
