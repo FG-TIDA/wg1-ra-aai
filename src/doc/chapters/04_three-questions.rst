@@ -39,6 +39,13 @@ strength:
 - **Behaviour observed during operation.** What the agent actually did, as
   distinct from what it is capable of doing.
 
+- **The authored policy set.** The identity and version of the rules the
+  agent's actions are evaluated against, and the authority under which those
+  rules were authored. Behaviour is only meaningful against a reference, so the
+  reference is itself a candidate object of attestation. It changes
+  independently of code, model and runtime state; the timing side of that
+  independence is the *At policy change* trigger in *When to Attest?* below.
+
 The difficulty is that these objects have different lifetimes and different
 verification costs, and a single attestation cannot carry all of them at
 equal strength. The distinction that matters at the point of reliance is
@@ -54,6 +61,28 @@ instance acted. Regimes in other regulated domains separate a type-level
 identifier from an instance- or production-level identifier for exactly this
 reason, and the separation is what allows a consumer to cache the first and
 must re-check the second.
+
+A **conformance verdict** is a behavioural form of the instance claim: the
+result of evaluating one specific action against the authored policy set. It
+is a claim by the engine that issued it, so it should carry the identity of
+that engine. Carrying the issuer is necessary for the verdict to stand as an
+instance claim, but it is not sufficient on its own. A verdict should also be
+**re-derivable** by the relying party from the evidence package. If only the
+issuing engine can recompute the verdict, the claim rests on a producer-side
+computation that the *Offline re-verifiability* requirement in *How to
+Attest?* rules out.
+
+A verdict is more usable when it is drawn from a small closed vocabulary than
+when it is free text, because a closed set can be compared across
+heterogeneous evidence. One such set is the vocabulary stated in the themes
+discussion on intent-based security policies (issue 6) — *permit*,
+*remediate*, *block*, *escalate*, *indeterminate*. Which terms a particular
+profile adopts is a matter for that profile; what matters here is that the
+terms are fixed and shared, rather than chosen by each producer.
+
+One distinction is worth keeping: a verifier's *no-assertion* result is
+evidence-side, while an *indeterminate* verdict is action-side. The two
+should not be read as the same state.
 
 How to Attest?
 --------------
