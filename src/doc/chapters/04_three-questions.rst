@@ -1,3 +1,4 @@
+
 .. _chapter-three-questions:
 
 Three Fundamental Questions
@@ -79,35 +80,28 @@ independently failable:
    infrastructure to be online, and without having to trust a verdict that
    only the producer is able to compute.
 
-**A worked, publicly checkable example.** In the course of other work on
-evidence packages for automated systems, an evidence construction was built in
-which a package is sealed with an evidence root, anchored to a public
-transparency log (Sigstore Rekor [1]_, entry ``logIndex 2883389783``), and
-archived with a persistent software identifier (Software Heritage SWHID [2]_).
-A relying party can (a) re-compute the package digest, (b) look up the
-transparency-log entry, and (c) confirm the archive anchor — all
-without contacting the producer. A reference implementation is released under a
-persistent DOI (https://doi.org/10.5281/zenodo.22821834), with the archive
-digest published alongside it, so that a third party can confirm the artefact
-was not altered after release. The released material includes a fixture set of
-eight packages — one clean baseline and seven mutations, all within one
-documented threat-model class — each carrying an expected per-check outcome
-that is machine-compared against a hand-derived expectation matrix, so the
-table cannot drift silently; and a second implementation of the verifier,
-written from the specification rather than from the reference code, whose
-verdicts agree with the reference on every fixture. A demonstration run
-exercises both an accept path and a tamper-detection path.
+**How the three can be met together.** They are not in tension with one
+another, and a single construction can carry all of them. Such a construction
+moves away from one opaque attestation and towards a *verifiable evidence
+package*: the evidence supporting an action is sealed under a digest, the
+digest is published to a public transparency log so that its existence at a
+given point in time can be checked by anyone, and the package is archived
+under a persistent identifier so that its contents can be confirmed unmodified
+after release. A relying party can then re-compute the package digest, look up
+the log entry, and confirm the archive anchor — all of it offline, without
+contacting the producer, and without having to trust a verdict that only the
+producer is able to compute.
 
-The artefact describes itself as a proposal rather than a formal standard, and
-scopes its results accordingly: a PASS means that no violation was found within
-the observed evidence boundary, not that trustworthiness is asserted in
-general. This is worth stating because the boundary is part of what is offered —
-a verifier-side artefact that does not state the limits of its own verdict is
-itself an instance of the problem this chapter examines.
+A construction of this kind is a proposal rather than a formal standard, and it
+should scope its results accordingly: a pass means that no violation was found
+within the observed evidence boundary, not that trustworthiness is asserted in
+general. That scoping is part of the contribution. A verifier-side artefact
+that does not state the limits of its own verdict is itself an instance of the
+problem this chapter examines.
 
-This is offered not as a proposed mechanism for this chapter but as evidence
-that the three properties above are achievable with existing, general-purpose
-building blocks.
+The shape is described here not as a mechanism proposed for adoption in this
+chapter, but to record that the three properties above are jointly achievable
+using existing, general-purpose building blocks.
 
 **A minimal verifier-side checklist (proposed, for discussion).** For evidence
 claiming to support a consequential agent action, a relying party should be
@@ -126,19 +120,18 @@ automated verification generally, and — to the best of the author's knowledge 
 it is not yet enumerated for agent attestation. A catalogue of such cases —
 verification steps that report success while checking nothing — would be a
 modest but concrete contribution to this chapter, because failure semantics
-cannot be specified before the failure modes are enumerated. In the work cited
-above, such a record has been started: it lists failures that occurred in
-practice together with their root cause and the change that addressed them, in
-a deliberately plain format, so that others can extend it with their own cases.
+cannot be specified before the failure modes are enumerated. Entries in such a
+catalogue are worth recording in plain form: what happened, the root cause, and
+the change that addressed it, so that others can extend the record with their
+own cases.
 
-Two entries in that record were found by the test corpus rather than by
-review: a migration whose target carried a duplicate identifier was collapsed
-before comparison and still reported "no injections", and an empty migration
-scored PASS on all four preservation checks. Both are corrected in the
-development version that follows the one released under the DOI above; the
-record of them is kept in the project's change log. They are offered as
-concrete instances of the class — the check ran, and it reported success while
-checking nothing.
+Two instances are worth naming, because both were found by running a test
+corpus rather than by review. In the first, a comparison silently collapsed two
+distinct items into one before comparing them, and the check reported that
+nothing had been altered. In the second, a conformance check scored a pass on
+an empty input, because every assertion it made was vacuously true. Both belong
+to the same class: the check ran, and it reported success while checking
+nothing.
 
 When to Attest?
 ---------------
@@ -159,9 +152,9 @@ bound attestation:
 - **At policy change** — when the rules the agent is subject to are
   themselves updated.
 
-This aligns attestation with a **gate** semantics: the question at each
-trigger is not "is the agent trustworthy in general" but "may *this* action
-proceed *now*". The consequence is that an attestation is only
+This aligns attestation with a **decision-point** semantics: the question at
+each trigger is not "is the agent trustworthy in general" but "may *this*
+action proceed *now*". The consequence is that an attestation is only
 meaningful **relative to a decision point**, and a verifier should be able to
 state which decision point it is satisfied about. Two consequences follow.
 First, an attestation whose decision point cannot be named is not usable.
@@ -211,8 +204,3 @@ Standardization Gaps
   versus "continuously" is treated as an implementation choice, so two
   conforming implementations can produce evidence that is not mutually
   comparable at a decision point.
-
-.. [1] Sigstore Rekor — public transparency log for software artefacts.
-   Overview: https://docs.sigstore.dev/logging/overview/
-.. [2] Software Heritage persistent identifiers (SWHID), specified in
-   ISO/IEC 18670. https://docs.softwareheritage.org/
