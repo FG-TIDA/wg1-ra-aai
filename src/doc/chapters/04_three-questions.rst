@@ -67,10 +67,12 @@ result of evaluating one specific action against the authored policy set. It
 is a claim by the engine that issued it, so it should carry the identity of
 that engine. Carrying the issuer is necessary for the verdict to stand as an
 instance claim, but it is not sufficient on its own. A verdict should also be
-**re-derivable** by the relying party from the evidence package. If only the
-issuing engine can recompute the verdict, the claim rests on a producer-side
-computation that the *Offline re-verifiability* requirement in *How to
-Attest?* rules out.
+re-verifiable offline by the relying party from the evidence package: bound to
+the action, to the version of the policy set and to the issuing engine, with
+its evaluation parameters taken from the policy set. It should be reproducible,
+so that a party holding the identified engine version and the policy set can
+recompute it. Where a decision needs more than the producer's word, the
+relying party's policy can require an issuer independent of the agent.
 
 A verdict is more usable when it is drawn from a small closed vocabulary than
 when it is free text, because a closed set can be compared across
@@ -104,10 +106,14 @@ independently failable:
    explicit, verifiable notion of *when* the evidence was produced relative to
    the action (see *When to Attest?* below).
 
-3. **Offline re-verifiability** — the relying party can re-derive the verdict
-   from the evidence package alone, without requiring the producer's
-   infrastructure to be online, and without having to trust a verdict that
-   only the producer is able to compute.
+3. **Offline re-verifiability** — the relying party can check, offline and from
+   the evidence package alone, that the verdict is bound to *this* action, to
+   the version of the policy set and to the issuing engine, with its evaluation
+   parameters taken from the policy set. The verdict should also be
+   reproducible, so that a party holding the identified engine version and the
+   policy set — an auditor, say — can recompute it. Neither step requires the
+   producer's infrastructure to be online, and neither leaves the relying party
+   to trust a verdict that only the producer is able to compute.
 
 **How the three can be met together.** They are not in tension with one
 another, and a single construction can carry all of them. Such a construction
@@ -139,7 +145,9 @@ able to answer, from the package alone:
 - Does the evidence bind to the specific agent instance *and* the specific
   action?
 - Is the freshness window explicit, and is the evidence inside it?
-- Can the verdict be re-derived without contacting the producer?
+- Is the verdict bound offline to the action, the policy set version and the
+  engine, and reproducible by a party holding the engine version and the
+  policy set?
 - If verification of any of the above cannot be completed, is the default
   outcome to **deny** the action rather than to allow it?
 
